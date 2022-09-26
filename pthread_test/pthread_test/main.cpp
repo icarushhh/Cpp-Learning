@@ -6,12 +6,7 @@
 //
 
 #include <iostream>
-#include "pthread_helloworld.hpp"
-#include "pthread_args.hpp"
-#include "pthread_more_args.hpp"
-#include "pthread_join.hpp"
-#include "pthread_join_easy_exp.hpp"
-#include "pthread_return_value.hpp"
+#include "main.hpp"
 
 int main() {
     
@@ -20,7 +15,10 @@ int main() {
 //    pthread_more_args_test();
 //    pthread_join_test();
 //    pthread_join_easy();
-    pthread_return_value();
+//    pthread_return_value();
+//    thread_local_storage_test();
+//    mutex_test();
+    condition_variable();
     
 
     return 0;
