@@ -10,9 +10,9 @@
 
 #include <stdio.h>
 
-extern void helloworld_test01();
-extern void helloworld_test02();
-extern void helloworld_test03();
-extern void helloworld_test04();
+extern void vector_test01();
+extern void vector_test02();
+extern void vector_test03();
+extern void vector_test04();
 
 #endif /* STL_helloworld_hpp */

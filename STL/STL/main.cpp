@@ -10,10 +10,10 @@
 
 int main() {
     
-//    helloworld_test01();
-//    helloworld_test02();
-//    helloworld_test03();
-//    helloworld_test04();
+//    vector_test01();
+//    vector_test02();
+//    vector_test03();
+//    vector_test04();
 //    list_iterator_test();
 //    set_test01();
 //    set_test02();

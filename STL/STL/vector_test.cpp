@@ -5,7 +5,7 @@
 //  Created by 朱仕哲 on 2022/9/26.
 //
 
-#include "STL_helloworld.hpp"
+#include "vector_test.hpp"
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<vector>
@@ -14,7 +14,7 @@
 using namespace std;
 
 //STL 中的容器 算法 迭代器
-void helloworld_test01(){
+void vector_test01(){
     vector<int> v; //STL 中的标准容器之一 ：动态数组
     
     v.push_back(1); //vector 容器提供的插入数据的方法
@@ -49,7 +49,7 @@ public:
     int age;
 };
 
-void helloworld_test02(){
+void vector_test02(){
     vector<Teacher> v; //存储 Teacher 类型数据的容器
     
     Teacher t1(10), t2(20), t3(30);
@@ -67,7 +67,7 @@ void helloworld_test02(){
 }
 
 //存储 Teacher 类型指针
-void helloworld_test03(){
+void vector_test03(){
     vector<Teacher*> v; //存储 Teacher 类型指针
     Teacher* t1 = new Teacher(10);
     Teacher* t2 = new Teacher(20);
@@ -87,7 +87,7 @@ void helloworld_test03(){
 }
 
 //容器嵌套容器 难点
-void helloworld_test04()
+void vector_test04()
 {
     vector< vector<int> > v;
     vector<int>v1;
