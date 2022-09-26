@@ -38,6 +38,12 @@ operator[];//返回索引idx所指的数据，越界时，运行直接报错
 front();//返回容器中第一个数据元素
 back();//返回容器中最后一个数据元素
 
+// vector iterator 操作
+begin() // 返回指向vector开头的指针
+end()   // 返回指向vector末尾的指针
+rbegin()// 返回指向vector末尾的指针
+rend()  // 返回指向vector开头的指针
+
 //vector 插入和删除操作
 
 insert(const_iterator pos, int count,ele);//迭代器指向位置pos插入count个元素ele.

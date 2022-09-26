@@ -9,5 +9,8 @@
 #define main_h
 
 #include "STL_helloworld.hpp"
+#include "list_iterator.hpp"
+#include "set_test.hpp"
+#include "map_test.hpp"
 
 #endif /* main_h */

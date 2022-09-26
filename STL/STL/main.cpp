@@ -14,6 +14,11 @@ int main() {
 //    helloworld_test02();
 //    helloworld_test03();
 //    helloworld_test04();
+//    list_iterator_test();
+//    set_test01();
+//    set_test02();
+//    set_test03();
+    map_test();
     
     
     return 0;
