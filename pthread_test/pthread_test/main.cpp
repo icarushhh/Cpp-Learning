@@ -10,13 +10,17 @@
 #include "pthread_args.hpp"
 #include "pthread_more_args.hpp"
 #include "pthread_join.hpp"
+#include "pthread_join_easy_exp.hpp"
+#include "pthread_return_value.hpp"
 
 int main() {
     
 //    pthread_hello();
 //    pthread_args_test();
 //    pthread_more_args_test();
-    pthread_join_test();
+//    pthread_join_test();
+//    pthread_join_easy();
+    pthread_return_value();
     
 
     return 0;
