@@ -45,7 +45,9 @@ void* producer( void *arg ){
             
             if( BUFFER_SIZE == g_share.count ) {
                 printf( "Producer signaling full.\n" );
-                pthread_cond_signal( &g_cond );         // signal只通知一个线程，broadcast通知所有进程
+                pthread_cond_signal( &g_cond );        // signal只通知一个线程，broadcast通知所有进程
+                                                        // 经测试，consumer1 和 consumer2 轮流来
+//                pthread_cond_broadcast(&g_cond);        // broadcast 也是轮流来
             }
         }
         pthread_mutex_unlock( &g_mutex );
@@ -54,17 +56,17 @@ void* producer( void *arg ){
     return NULL;
 }
 
-void* consumer( void *arg ){
+void* consumer1( void *arg ){
     int i;
-    printf( "Consumer starting.\n" );
+    printf( "consumer1 starting.\n" );
     
     while( g_ch != 'Z' ) {
         pthread_mutex_lock( &g_mutex );
         
-        printf( "Consumer waiting\n" );
+        printf( "consumer1 waiting\n" );
         pthread_cond_wait( &g_cond, &g_mutex);          // wait函数将mutex解锁后等待，等到signal后重新加锁，继续执行
         
-        printf( "Consumer writing buffer\n" );
+        printf( "consumer1 writing buffer\n" );
         
         for( i = 0; g_share.buf[i] && g_share.count; ++i ) {
             putchar( g_share.buf[i] );
@@ -73,20 +75,46 @@ void* consumer( void *arg ){
         putchar('\n');
         pthread_mutex_unlock( &g_mutex );
     }
-    printf( "Consumer exit.\n" );
+    printf( "consumer1 exit.\n" );
+    return NULL;
+}
+
+void* consumer2( void *arg ){
+    int i;
+    printf( "consumer2 starting.\n" );
+    
+    while( g_ch != 'Z' ) {
+        pthread_mutex_lock( &g_mutex );
+        
+        printf( "consumer2 waiting\n" );
+        pthread_cond_wait( &g_cond, &g_mutex);          // wait函数将mutex解锁后等待，等到signal后重新加锁，继续执行
+        
+        printf( "consumer2 writing buffer\n" );
+        
+        for( i = 0; g_share.buf[i] && g_share.count; ++i ) {
+            putchar( g_share.buf[i] );
+            --g_share.count;
+        }
+        putchar('\n');
+        pthread_mutex_unlock( &g_mutex );
+    }
+    printf( "consumer2 exit.\n" );
     return NULL;
 }
 
 int condition_variable(){
-    pthread_t ppth, cpth;
+    pthread_t ppth, cpth1, cpth2;
     
     pthread_mutex_init( &g_mutex, NULL );
     pthread_cond_init( &g_cond, NULL );
     
-    pthread_create( &cpth, NULL, consumer, NULL );
+    pthread_create( &cpth1, NULL, consumer1, NULL );
+    pthread_create( &cpth2, NULL, consumer2, NULL );
     pthread_create( &ppth, NULL, producer, NULL );
     pthread_join( ppth, NULL );
-    pthread_join( cpth, NULL );
+    pthread_join( cpth1, NULL );
+    pthread_join( cpth2, NULL );
+    
     
     pthread_mutex_destroy( &g_mutex );
     pthread_cond_destroy( &g_cond );
