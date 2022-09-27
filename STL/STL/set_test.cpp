@@ -36,11 +36,16 @@ void set_test01(){
 }
 
 // 自定义比较函数
-struct MyCompare02{
+// 类重载()算符，称为仿函数。
+// 直接用bool函数不行
+// 编译器提示必须是一个 type
+class MyCompare02{
+public:
     bool operator()(int v1,int v2){
         return v1 > v2;
     }
 };
+
 
 //set从大到小
 void set_test02(){
@@ -72,7 +77,8 @@ public:
 };
 
 
-struct MyCompare03{
+class MyCompare03{
+public:
     bool operator()(const Person& p1,const Person& p2){
         return p1.mAge > p2.mAge;
     }

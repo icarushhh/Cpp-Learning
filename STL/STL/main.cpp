@@ -16,9 +16,9 @@ int main() {
 //    vector_test04();
 //    list_iterator_test();
 //    set_test01();
-//    set_test02();
+    set_test02();
 //    set_test03();
-    map_test();
+//    map_test();
     
     
     return 0;
