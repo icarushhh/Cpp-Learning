@@ -13,5 +13,6 @@
 #include "sort_test.hpp"
 #include "bind_test.hpp"
 #include "Traversal_test.hpp"
+#include "find_test.hpp"
 
 #endif /* main_hpp */

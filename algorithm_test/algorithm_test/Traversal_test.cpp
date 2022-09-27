@@ -138,9 +138,9 @@ void for_each_test03(){
     }
 */
 
-struct transformTest01{
-    int operator()(int val){
-        return val + 100;
+struct transformTest01: public binary_function<int, int, int>{
+    int operator()(int val, int arg){
+        return val + arg;
     }
 };
 
@@ -162,12 +162,16 @@ void transform_test01(){
     //给vTarget开辟空间
     vTarget.resize(vSource.size());
     //将vSource中的元素搬运到vTarget
-    vector<int>::iterator it = transform(vSource.begin(), vSource.end(), vTarget.begin(), transformTest01());
+    vector<int>::iterator it = transform(vSource.begin(), vSource.end(), vTarget.begin(),
+                                         bind(transformTest01(), placeholders::_1, 101));
+    // return 目标容器迭代器
     //打印
+    cout << *it << endl;
     for_each(vTarget.begin(), vTarget.end(), print04());
     cout << endl;
     
 }
+
 
 //将容器1和容器2中的元素相加放入到第三个容器中
 struct transformTest02: public binary_function<int, int, int>{
@@ -182,6 +186,7 @@ void transform_test02(){
     vector<int> vSource2;
     for (int i = 0; i < 10; i++){
         vSource1.push_back(i + 1);
+        vSource2.push_back(9 - i);
     }
 
     //目标容器
@@ -190,6 +195,7 @@ void transform_test02(){
     vTarget.resize(vSource1.size());
     transform(vSource1.begin(), vSource1.end(), vSource2.begin(),vTarget.begin(), transformTest02());
     //打印
-    for_each(vTarget.begin(), vTarget.end(), print04()); cout << endl;
+    for_each(vTarget.begin(), vTarget.end(), print04());
+    cout << endl;
 }
 
