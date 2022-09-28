@@ -10,7 +10,7 @@
 
 int main(){
     
-//    sort_test();
+    sort_test();
 //    bind_test01();
 //    bind_test02();
 //    bind_test03();
@@ -20,7 +20,7 @@ int main(){
 //    for_each_test03();
 //    transform_test01();
 //    transform_test02();
-    find_test01();
+//    find_test01();
 
     
     return 0;

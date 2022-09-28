@@ -10,8 +10,11 @@
 #include <random>
 #include <vector>
 #include <functional>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
+
 
 // compare function; using for decending sort
 extern bool cmp(int a, int b){
@@ -30,14 +33,16 @@ class SEQ{
 public:
     
     SEQ(void){
+    
         for (int i = 0; i < 10; i++) {
-            num.push_back(i);
+            num.push_back(rand()%20);
         }
         
         it = num.begin();
         
-        std::random_device rd;
-        std::shuffle(it, it+10, rd);              // 将容器中数据随机打乱
+        random_device rd;
+        shuffle(it, it+10, rd);              // 将容器中数据随机打乱
+        
     }
     
     void acending_sort(){
@@ -56,8 +61,16 @@ public:
         
     
     void reverse(){
-        std::reverse(it, it+10);
+        ::reverse(it, it+10);
         return;
+    }
+    
+    SEQ operator+(SEQ another_seq){
+        SEQ sum;
+        sum.num.resize(this->num.size() + another_seq.num.size());
+        merge(this->num.begin(), this->num.end(), another_seq.num.begin(), another_seq.num.end(), sum.num.begin(),
+              less<int>());
+        return sum;
     }
     
     friend ostream& operator<<(ostream &output, SEQ seq);
@@ -70,8 +83,8 @@ private:
 
 // operate << overload
 ostream& operator<<(ostream &output, SEQ seq){
-    for (int i = 0; i < 10; i++) {
-        output << seq.num[i] << ' ';
+    for (vector<int>::iterator it = seq.num.begin(); it < seq.num.end(); it++) {
+        output << *it << ' ';
     }
     output << endl;
     
@@ -80,7 +93,13 @@ ostream& operator<<(ostream &output, SEQ seq){
 
 
 int sort_test() {
+    
+    srand(time(NULL));
+    
     SEQ seq;
+    SEQ seq2;
+    
+    
     cout << "原数组：" << endl;
     cout << seq;
     
@@ -95,7 +114,14 @@ int sort_test() {
     seq.reverse();
     cout << "倒序后：" << endl;
     cout << seq;
-
+    
+    seq2.acending_sort();
+    cout << "seq2 升序排序： " << endl;
+    cout << seq2;
+    
+    cout << "after merge: " << endl;
+    cout << (seq + seq2);
+   
     
     return 0;
 }

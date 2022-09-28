@@ -119,6 +119,7 @@ void for_each_test03(){
 
 //transform:
 //transform 将一个容器中的值搬运到另一个容器中
+//但原容器中的值并没有消失
 /*
     template<class _InIt, class _OutIt, class _Fn1> inline
     _OutIt _Transform(_InIt _First, _InIt _Last,_OutIt _Dest, _Fn1 _Func)
@@ -163,11 +164,14 @@ void transform_test01(){
     vTarget.resize(vSource.size());
     //将vSource中的元素搬运到vTarget
     vector<int>::iterator it = transform(vSource.begin(), vSource.end(), vTarget.begin(),
-                                         bind(transformTest01(), placeholders::_1, 101));
+                                         bind(transformTest01(), placeholders::_1, 102));
     // return 目标容器迭代器
     //打印
     cout << *it << endl;
+    cout << "vTarget: ";
     for_each(vTarget.begin(), vTarget.end(), print04());
+    cout << endl << "vSource: ";
+    for_each(vSource.begin(), vSource.end(), print04());
     cout << endl;
     
 }
